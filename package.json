@@ -1,0 +1,31 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "Compares two configuration files and shows a difference",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faciledictu/frontend-project-lvl2.git"
+  },
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
+  "author": "Dmitry Zhigulin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/faciledictu/frontend-project-lvl2/issues"
+  },
+  "homepage": "https://github.com/faciledictu/frontend-project-lvl2#readme",
+  "devDependencies": {
+    "eslint": "^8.19.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  },
+  "dependencies": {
+    "commander": "^9.3.0"
+  }
+}
