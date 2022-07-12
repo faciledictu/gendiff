@@ -6,4 +6,8 @@
 
 Hexlet Study Project, Level 2
 
+## Comparing two JSON files
 [![asciicast](https://asciinema.org/a/MABjX1zeQHSBWrrfWDIkesxOq.svg)](https://asciinema.org/a/MABjX1zeQHSBWrrfWDIkesxOq)
+
+## Comparing two YAML files
+[![asciicast](https://asciinema.org/a/uKizy1fzx3QhUGiwQ2fNBe27Q.svg)](https://asciinema.org/a/uKizy1fzx3QhUGiwQ2fNBe27Q)
