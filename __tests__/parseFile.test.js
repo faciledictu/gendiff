@@ -1,3 +1,5 @@
+import { fileURLToPath } from 'url';
+import path, { dirname } from 'path';
 import { parseFile } from '../src/index.js';
 
 const entries = [
@@ -6,17 +8,20 @@ const entries = [
   ['proxy', '123.234.53.22'],
   ['follow', false],
 ];
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
 test('relative path', () => {
   expect(parseFile('__fixtures__/file1.json')).toEqual(entries);
 });
 
 test('absolute path', () => {
-  expect(parseFile('/Users/dmitrijzigulin/Coding/frontend-project-lvl2/__fixtures__/file1.json')).toEqual(entries);
+  expect(parseFile(getFixturePath('file1.json'))).toEqual(entries);
 });
 
 test('unsupported extension', () => {
   expect(() => {
-    parseFile('__fixtures__/file1.jsn');
+    parseFile(getFixturePath('file1.txt'));
   }).toThrow();
 });
