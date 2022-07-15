@@ -1,28 +1,24 @@
 import yaml from 'js-yaml';
 
-const selectParser = (format) => {
+const parse = (file, format) => {
+  let parseData;
   switch (format) {
     case '.json':
-      return JSON.parse;
+      parseData = JSON.parse;
+      break;
 
     case '.yaml':
     case '.yml':
-      return yaml.load;
+      parseData = yaml.load;
+      break;
 
     default:
-      throw new Error('Unsupported file type');
+      throw new Error(`Unsupported data type: ${format}`);
   }
-};
-
-const parse = (file, format) => {
-  const parseData = selectParser(format);
 
   const obj = parseData(file);
-  const entries = Object
-    .entries(obj)
-    .map((entry) => ({ key: entry[0], value: entry[1] }));
 
-  return entries;
+  return obj;
 };
 
 export default parse;
