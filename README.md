@@ -18,3 +18,6 @@ Hexlet Study Project, Level 2
 
 ### Plain
 [![asciicast](https://asciinema.org/a/rdM51w6JuZNU2fnaRCH5CGu4q.svg)](https://asciinema.org/a/rdM51w6JuZNU2fnaRCH5CGu4q)
+
+### JSON
+[![asciicast](https://asciinema.org/a/EJsG0QwGEnxo7P3UHTcgVcBy7.svg)](https://asciinema.org/a/EJsG0QwGEnxo7P3UHTcgVcBy7)
