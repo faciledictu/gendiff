@@ -12,12 +12,14 @@ const stringify = (value) => {
   return `${value}`;
 };
 
-const plain = (diff) => {
-  const iter = (node, path) => {
+export default (diff) => {
+  const iter = (node, parentPath) => {
     const output = node
       .map((entry) => {
-        const currentPath = `${path}${entry.key}`;
-        switch (entry.type) {
+        const { key, type } = entry;
+        const currentPath = `${parentPath}${key}`;
+
+        switch (type) {
           case 'nest':
             return iter(entry.children, `${currentPath}.`);
 
@@ -41,5 +43,3 @@ const plain = (diff) => {
   };
   return iter(diff, '').join('\n');
 };
-
-export default plain;

@@ -17,27 +17,15 @@ const compare = (obj1, obj2) => {
     }
 
     if (addedKeys.includes(key)) {
-      return {
-        key,
-        type: 'added',
-        newValue,
-      };
+      return { key, type: 'added', newValue };
     }
     if (_.isEqual(obj1[key], obj2[key])) {
-      return {
-        key,
-        type: 'unchanged',
-        value: oldValue,
-      };
+      return { key, type: 'unchanged', value: oldValue };
     }
 
     if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
       const children = compare(obj1[key], obj2[key]);
-      return {
-        key,
-        type: 'nest',
-        children,
-      };
+      return { key, type: 'nest', children };
     }
 
     return {
