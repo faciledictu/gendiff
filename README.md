@@ -12,5 +12,9 @@ Hexlet Study Project, Level 2
 ## Comparing two YAML files
 [![asciicast](https://asciinema.org/a/uKizy1fzx3QhUGiwQ2fNBe27Q.svg)](https://asciinema.org/a/uKizy1fzx3QhUGiwQ2fNBe27Q)
 
-## Stylish formatter
+## Formatters
+### Stylish
 [![asciicast](https://asciinema.org/a/oDWGFot1V9Il3pMiuUY7nCQOw.svg)](https://asciinema.org/a/oDWGFot1V9Il3pMiuUY7nCQOw)
+
+### Plain
+[![asciicast](https://asciinema.org/a/rdM51w6JuZNU2fnaRCH5CGu4q.svg)](https://asciinema.org/a/rdM51w6JuZNU2fnaRCH5CGu4q)
