@@ -4,49 +4,59 @@ const spacer = '    ';
 const removed = '  - ';
 const added = '  + ';
 
-const stringify = (value, padding) => {
+const makeLine = (callback, key, rawValue, depth, mark = spacer) => {
+  const indent = spacer.repeat(depth);
+  const value = callback(rawValue, depth + 1);
+  return `${indent}${mark}${key}: ${value}`;
+};
+
+const stringify = (value, depth) => {
+  const indent = spacer.repeat(depth);
+
   if (_.isObject(value)) {
-    const outsideIndent = spacer.repeat(padding);
     const result = Object
       .entries(value)
-      .map(([key, val]) => `${outsideIndent}${spacer}${key}: ${stringify(val, padding + 1)}`);
+      .map(([key, val]) => makeLine(stringify, key, val, depth));
     return [
       '{',
       ...result,
-      `${outsideIndent}}`,
+      `${indent}}`,
     ].join('\n');
   }
 
   return `${value}`;
 };
 
-const stylish = (diff) => {
+export default (diff) => {
   const iter = (node, depth) => {
-    const indent = spacer.repeat(depth);
     const output = node.map((entry) => {
-      switch (entry.type) {
+      const { key, type } = entry;
+
+      switch (type) {
         case 'nest':
-          return `${indent}${spacer}${entry.key}: ${iter(entry.children, depth + 1)}`;
+          return makeLine(iter, key, entry.children, depth);
 
         case 'removed':
-          return `${indent}${removed}${entry.key}: ${stringify(entry.oldValue, depth + 1)}`;
+          return makeLine(stringify, key, entry.oldValue, depth, removed);
 
         case 'added':
-          return `${indent}${added}${entry.key}: ${stringify(entry.newValue, depth + 1)}`;
+          return makeLine(stringify, key, entry.newValue, depth, added);
 
         case 'unchanged':
-          return `${indent}${spacer}${entry.key}: ${stringify(entry.value, depth + 1)}`;
+          return makeLine(stringify, key, entry.value, depth);
 
         case 'changed':
           return [
-            `${indent}${removed}${entry.key}: ${stringify(entry.oldValue, depth + 1)}`,
-            `${indent}${added}${entry.key}: ${stringify(entry.newValue, depth + 1)}`,
+            makeLine(stringify, key, entry.oldValue, depth, removed),
+            makeLine(stringify, key, entry.newValue, depth, added),
           ].join('\n');
 
         default:
-          throw new Error(`Unable to parse the comparison result. Unknown entry type: "${entry.type}"`);
+          throw new Error(`Unable to parse the comparison result. Unknown entry type: "${type}"`);
       }
     });
+
+    const indent = spacer.repeat(depth);
     return [
       '{',
       ...output,
@@ -56,5 +66,3 @@ const stylish = (diff) => {
 
   return iter(diff, 0);
 };
-
-export default stylish;
