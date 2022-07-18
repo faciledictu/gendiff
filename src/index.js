@@ -6,8 +6,11 @@ import format from './formatters/index.js';
 
 const parseFromFile = (filepath) => {
   const extension = path.extname(filepath);
+  const type = extension[0] === '.' ? extension.slice(1) : extension;
+
   const file = fs.readFileSync(filepath);
-  const obj = parse(file, extension);
+
+  const obj = parse(file, type);
   return obj;
 };
 

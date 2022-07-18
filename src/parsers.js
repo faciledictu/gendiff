@@ -1,16 +1,16 @@
 import yaml from 'js-yaml';
 
-const parse = (file, format) => {
-  switch (format.toLowerCase()) {
-    case '.json':
-      return JSON.parse(file);
+const parse = (data, type) => {
+  switch (type.toLowerCase()) {
+    case 'json':
+      return JSON.parse(data);
 
-    case '.yaml':
-    case '.yml':
-      return yaml.load(file);
+    case 'yaml':
+    case 'yml':
+      return yaml.load(data);
 
     default:
-      throw new Error(`Unsupported file type: ${format}`);
+      throw new Error(`Unsupported data type: ${type}`);
   }
 };
 
