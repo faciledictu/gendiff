@@ -27,10 +27,10 @@ export default (diff) => {
             return `Property '${currentPath}' was removed`;
 
           case 'added':
-            return `Property '${currentPath}' was added with value: ${stringify(entry.newValue)}`;
+            return `Property '${currentPath}' was added with value: ${stringify(entry.value)}`;
 
           case 'changed':
-            return `Property '${currentPath}' was updated. From ${stringify(entry.oldValue)} to ${stringify(entry.newValue)}`;
+            return `Property '${currentPath}' was updated. From ${stringify(entry.value1)} to ${stringify(entry.value2)}`;
 
           case 'unchanged':
             return [];

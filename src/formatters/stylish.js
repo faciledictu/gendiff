@@ -37,18 +37,18 @@ export default (diff) => {
           return makeLine(iter, key, entry.children, depth);
 
         case 'removed':
-          return makeLine(stringify, key, entry.oldValue, depth, removed);
+          return makeLine(stringify, key, entry.value, depth, removed);
 
         case 'added':
-          return makeLine(stringify, key, entry.newValue, depth, added);
+          return makeLine(stringify, key, entry.value, depth, added);
 
         case 'unchanged':
           return makeLine(stringify, key, entry.value, depth);
 
         case 'changed':
           return [
-            makeLine(stringify, key, entry.oldValue, depth, removed),
-            makeLine(stringify, key, entry.newValue, depth, added),
+            makeLine(stringify, key, entry.value1, depth, removed),
+            makeLine(stringify, key, entry.value2, depth, added),
           ].join('\n');
 
         default:

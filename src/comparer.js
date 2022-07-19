@@ -9,30 +9,31 @@ const compare = (obj1, obj2) => {
   const addedKeys = _.difference(keys2, keys1);
 
   const diff = allKeys.map((key) => {
-    const oldValue = obj1[key];
-    const newValue = obj2[key];
+    const value1 = obj1[key];
+    const value2 = obj2[key];
 
     if (removedKeys.includes(key)) {
-      return { key, type: 'removed', oldValue };
+      return { key, type: 'removed', value: value1 };
     }
 
     if (addedKeys.includes(key)) {
-      return { key, type: 'added', newValue };
-    }
-    if (_.isEqual(obj1[key], obj2[key])) {
-      return { key, type: 'unchanged', value: oldValue };
+      return { key, type: 'added', value: value2 };
     }
 
-    if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
-      const children = compare(obj1[key], obj2[key]);
+    if (_.isEqual(value1, value2)) {
+      return { key, type: 'unchanged', value: value1 };
+    }
+
+    if (_.isObject(value1) && _.isObject(value2)) {
+      const children = compare(value1, value2);
       return { key, type: 'nest', children };
     }
 
     return {
       key,
       type: 'changed',
-      oldValue,
-      newValue,
+      value1,
+      value2,
     };
   });
 
