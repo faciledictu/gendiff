@@ -15,7 +15,7 @@ const stringify = (value) => {
 export default (diff) => {
   const iter = (node, parentPath) => {
     const output = node
-      .map((entry) => {
+      .flatMap((entry) => {
         const { key, type } = entry;
         const currentPath = `${parentPath}${key}`;
 
@@ -39,7 +39,7 @@ export default (diff) => {
             throw new Error(`Unable to parse the comparison result. Unknown entry type: "${entry.type}"`);
         }
       });
-    return output.flat();
+    return output;
   };
   return iter(diff, '').join('\n');
 };
