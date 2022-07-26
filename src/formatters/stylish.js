@@ -4,19 +4,13 @@ const spacer = '    ';
 const removed = '  - ';
 const added = '  + ';
 
-const makeLine = (callback, key, rawValue, depth, mark = spacer) => {
-  const indent = spacer.repeat(depth);
-  const value = callback(rawValue, depth + 1);
-  return `${indent}${mark}${key}: ${value}`;
-};
-
 const stringify = (value, depth) => {
   const indent = spacer.repeat(depth);
 
   if (_.isObject(value)) {
     const result = Object
       .entries(value)
-      .map(([key, val]) => makeLine(stringify, key, val, depth));
+      .map(([key, val]) => `${indent}${spacer}${key}: ${stringify(val, depth + 1)}`);
     return [
       '{',
       ...result,
@@ -29,26 +23,28 @@ const stringify = (value, depth) => {
 
 export default (diff) => {
   const iter = (node, depth) => {
+    const indent = spacer.repeat(depth);
+
     const output = node.map((entry) => {
       const { key, type } = entry;
 
       switch (type) {
         case 'nest':
-          return makeLine(iter, key, entry.children, depth);
+          return `${indent}${spacer}${key}: ${iter(entry.children, depth + 1)}`;
 
         case 'removed':
-          return makeLine(stringify, key, entry.value, depth, removed);
+          return `${indent}${removed}${key}: ${stringify(entry.value, depth + 1)}`;
 
         case 'added':
-          return makeLine(stringify, key, entry.value, depth, added);
+          return `${indent}${added}${key}: ${stringify(entry.value, depth + 1)}`;
 
         case 'unchanged':
-          return makeLine(stringify, key, entry.value, depth);
+          return `${indent}${spacer}${key}: ${stringify(entry.value, depth + 1)}`;
 
         case 'changed':
           return [
-            makeLine(stringify, key, entry.value1, depth, removed),
-            makeLine(stringify, key, entry.value2, depth, added),
+            `${indent}${removed}${key}: ${stringify(entry.value1, depth + 1)}`,
+            `${indent}${added}${key}: ${stringify(entry.value2, depth + 1)}`,
           ].join('\n');
 
         default:
@@ -56,7 +52,6 @@ export default (diff) => {
       }
     });
 
-    const indent = spacer.repeat(depth);
     return [
       '{',
       ...output,
