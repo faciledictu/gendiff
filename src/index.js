@@ -1,5 +1,5 @@
-import fs from 'node:fs';
 import path from 'path';
+import { readFileSync } from 'fs';
 import parse from './parsers.js';
 import compare from './comparer.js';
 import format from './formatters/index.js';
@@ -8,7 +8,7 @@ const parseFromFile = (filepath) => {
   const extension = path.extname(filepath);
   const type = extension[0] === '.' ? extension.slice(1) : extension;
 
-  const file = fs.readFileSync(filepath);
+  const file = readFileSync(filepath);
 
   const obj = parse(file, type);
   return obj;
