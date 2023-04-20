@@ -5,11 +5,9 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/4d7aaf8e60876fe02041/maintainability)](https://codeclimate.com/github/faciledictu/frontend-project-lvl2/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/4d7aaf8e60876fe02041/test_coverage)](https://codeclimate.com/github/faciledictu/frontend-project-lvl2/test_coverage)
 
-Hexlet Study Project, Level 2
+The tool compares two configuration files and shows a difference. It supports JSON and YAML files and shows result in several text output formats.
 
-## About
-
-Compares two configuration files and shows a difference. The tool supports JSON and YAML files and shows result in several text output formats.
+This is my studying project at Hexlet School.
 
 ## Getting Started
 
